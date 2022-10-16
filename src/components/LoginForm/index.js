@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import {Redirect} from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import './index.css'
 
@@ -22,7 +23,8 @@ class LoginForm extends Component {
   onSubmitSuccess = jwtToken => {
     const {history} = this.props
 
-    return <Redirect to="/" />
+    Cookies.set('jwt_token', jwtToken, {expires: 30})
+    history.replace('/')
   }
 
   onSubmitFailure = errorMsg => {
